@@ -3,14 +3,7 @@
 #include "roaring.c"
 SQLITE_EXTENSION_INIT1
 
-/* Insert your extension code here */
-
-/* Vtable: go */
-
-
 #ifndef SQLITE_OMIT_VIRTUALTABLE
-
-// Summary: this is iterator state. Here’s ours:
 
 typedef struct sqlite3roaring_cursor sqlite3roaring_cursor;
 
@@ -35,14 +28,6 @@ static int roaringConnect(
   sqlite3_vtab *pNew;
   int rc;
 
-/* Column numbers */
-#define S3ROARING_COLUMN_ROWID (-1)
-#define S3ROARING_SERIES_COLUMN_VALUE 0
-
-  (void)pUnused;
-  (void)argcUnused;
-  (void)argvUnused;
-  (void)pzErrUnused;
   rc = sqlite3_declare_vtab(db, "CREATE TABLE x(value, bitmap BLOB HIDDEN)");
   if( rc==SQLITE_OK ){
     pNew = *ppVtab = sqlite3_malloc( sizeof(*pNew) );
